@@ -14,10 +14,14 @@
                 <label>Nome:</label>
                 <input type="text" class="form-control" name="nome" id="nome" />
             </div>
-            <div class="form-group col-sm-4">
-                <label>Tensão:</label>
-                <input type="text" class="form-control" name="tensao" id="tensao" />
-            </div>
+            <div class="form-group col-md-4">
+                    <label for="tensao">Tensão:</label>
+                    <select id="tensao"  class="form-control" name="tensao">
+                        <option value="">Selecione</option>
+                        <option value="110v">110v</option>
+                        <option value="220v">220v</option>
+                    </select>
+                </div>
             <div class="form-group col-sm-4">
                 <label>Descrição:</label>
                 <input type="text" class="form-control" name="descricao" id="descricao" />

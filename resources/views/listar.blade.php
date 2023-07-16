@@ -12,7 +12,6 @@
 </div>
 
 <filtros-eletrodomestico></filtros-eletrodomestico>
-
 <tabela-eletrodomestico></tabela-eletrodomestico>
 @endsection
 <script>

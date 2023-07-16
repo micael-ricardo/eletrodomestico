@@ -48,7 +48,7 @@ export default {
                     data: function (d) {
                         d.nome = $('#nome').val();
                         d.tensao = $('#tensao').val();
-                        d.estado = $('#descricao').val();
+                        d.descricao = $('#descricao').val();
                     }
                 },
                 columns: columns,
