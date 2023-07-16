@@ -1,5 +1,5 @@
 <template>
-    <div class="panel panel-inverse mb-3" id="filtro" style=" display: none;">
+    <div class="panel panel-inverse mb-3" id="filtro" style="display: none;">
         <div class="row">
             <div class="form-group col-sm-2">
                 <label>Data Início:</label>
@@ -29,3 +29,27 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    mounted() {
+        this.addFilterEventListener();
+    },
+    methods: {
+        addFilterEventListener() {
+            var self = this;
+            $('#nome, #tensao, #descricao').on('change', function () {
+                var nome = $('#nome').val();
+                var tensao = $('#tensao').val();
+                var descricao = $('#descricao').val();
+
+                var tabela = $('#datatable').DataTable();
+                tabela.column(0).search(nome);
+                tabela.column(1).search(tensao);
+                tabela.column(2).search(descricao);
+                tabela.draw();
+            });
+        },
+    },
+};
+</script>

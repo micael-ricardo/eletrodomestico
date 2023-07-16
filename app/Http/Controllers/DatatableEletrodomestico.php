@@ -12,9 +12,14 @@ class DatatableEletrodomestico extends Controller
 {
     public function datatable(Request $request)
     {
-        $eletrodomesticos = eletrodomesticos::all();
+        $eletrodomesticos = eletrodomesticos::query();
 
-        return Datatables::of($eletrodomesticos)->make(true);
-      
+        if ($request->has('nome') && $request->input('nome') !== null) {
+            $eletrodomesticos->where('nome', 'like', '%' . $request->input('nome') . '%');
+        }
+        
+
+        return DataTables::of($eletrodomesticos)->toJson();
     }
+
 }
