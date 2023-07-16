@@ -29,7 +29,6 @@
             </div>
             <div class="col-md-12 mt-3">
                 <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Cadastrar </button>
-
                 <button type="button" @click="goToList" class="btn btn-danger"><i class="bi bi-trash"></i>Cancelar</button>
             </div>
         </form>

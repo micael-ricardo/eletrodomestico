@@ -14,7 +14,7 @@ class DatatableEletrodomestico extends Controller
     {
 
         // dd($request);
-        $eletrodomesticos = eletrodomesticos::query();
+        $eletrodomesticos = eletrodomesticos::with('marca');
 
         if ($request->has('nome') && $request->input('nome') !== null) {
             $eletrodomesticos->where('nome', 'like', '%' . $request->input('nome') . '%');

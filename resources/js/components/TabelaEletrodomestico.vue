@@ -5,6 +5,7 @@
                 <th>Nome</th>
                 <th>Tensão</th>
                 <th>Descrição</th>
+                <th>Marcas</th>
                 <!-- <th>Ações</th> -->
             </tr>
         </thead>
@@ -33,6 +34,11 @@ export default {
                 {
                     data: 'descricao',
                     title: 'Descrição',
+                    width: "250px",
+                },
+                {
+                    data: 'marca.nome', 
+                    title: 'Marca',
                     width: "250px",
                 },
             ];
