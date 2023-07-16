@@ -10,12 +10,6 @@ use App\Models\eletrodomesticos;
 
 class DatatableEletrodomestico extends Controller
 {
-
-    public function index()
-    {
-        return view('cidade_bairro.listar');
-    }
-
     public function datatable(Request $request)
     {
         $eletrodomesticos = eletrodomesticos::all();
