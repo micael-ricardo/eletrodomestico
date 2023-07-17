@@ -31,6 +31,14 @@ export default {
                     data: 'tensao',
                     title: 'Tensão',
                     width: "50px",
+                    render: function (data, type, row) {
+                        if (data == '220v') {
+                            return '<span class="btn btn-danger btn-sm"> 220V </span>';
+                        } else {
+                            return '<span class="btn btn-success btn-sm"> 110V </span>';
+                        }
+                    },
+                    className: 'text-center'
                 },
                 {
                     data: 'descricao',
@@ -41,15 +49,17 @@ export default {
                     data: 'marca.nome',
                     title: 'Marca',
                     width: "100px",
+                    className: 'text-center'
                 },
                 {
                     data: 'created_at',
                     title: 'Data Cadastro',
-                    width: "120px",
+                    width: "90px",
                     render: function (data, type, row) {
-                        var dataFormatada = moment(data).format('DD/MM/YYYY HH:mm');
+                        var dataFormatada = moment(data).format('DD/MM/YYYY');
                         return dataFormatada;
-                    }
+                    },
+                    className: 'text-center'
                 },
                 {
                     data: 'id',
