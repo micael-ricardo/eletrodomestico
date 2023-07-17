@@ -68,17 +68,29 @@ export default {
         },
         addFilterEventListener() {
             var self = this;
-            $('#nome, #tensao, #descricao,#marca_id').on('change', function () {
+            $('#nome, #tensao, #descricao,#marca_id,#data_inicio,#data_fim').on('change', function () {
                 var nome = $('#nome').val();
                 var tensao = $('#tensao').val();
                 var descricao = $('#descricao').val();
                 var marca = $('#marca_id').val();
+                var dataInicio = $('#data_inicio').val();
+                var dataFim = $('#data_fim').val();
 
                 var tabela = $('#datatable').DataTable();
                 tabela.column(0).search(nome);
                 tabela.column(1).search(tensao);
                 tabela.column(2).search(descricao);
                 tabela.column(3).search(marca);
+
+                if (dataInicio && dataFim) {
+                    tabela.column(4).data().each(function (value, index) {
+                        var date = new Date(value);
+                        if (date >= new Date(dataInicio) && date <= new Date(dataFim)) {
+                            tabela.row(index).draw();
+                        }
+                    });
+                }
+
                 tabela.draw();
             });
         },

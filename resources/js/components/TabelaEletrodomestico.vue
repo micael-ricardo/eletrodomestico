@@ -6,6 +6,7 @@
                 <th>Tensão</th>
                 <th>Descrição</th>
                 <th>Marcas</th>
+                <th>Data Cadastro</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -24,12 +25,12 @@ export default {
                 {
                     data: 'nome',
                     title: 'Nome',
-                    width: "250px",
+                    width: "100px",
                 },
                 {
                     data: 'tensao',
                     title: 'Tensão',
-                    width: "250px",
+                    width: "50px",
                 },
                 {
                     data: 'descricao',
@@ -39,16 +40,24 @@ export default {
                 {
                     data: 'marca.nome',
                     title: 'Marca',
-                    width: "250px",
+                    width: "100px",
+                },
+                {
+                    data: 'created_at',
+                    title: 'Data Cadastro',
+                    width: "120px",
+                    render: function (data, type, row) {
+                        var dataFormatada = moment(data).format('DD/MM/YYYY HH:mm');
+                        return dataFormatada;
+                    }
                 },
                 {
                     data: 'id',
                     title: 'Ações',
                     width: "100px",
                     render: function (data, type, row) {
-                    
+
                         var nome = row.nome;
-                        // var btnEditar = '<a href="/eletrodomesticos/' + data + '/edit" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i></a>';
                         var btnEditar = '<a href="/eletrodomestico/' + data + '/editar" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i></a>';
                         var btnDeletar = '<button type="button" data-bs-target="#ModalDeletar" data-bs-toggle="modal" data-id="' + data + '" data-nome="' + nome + '" class="btn btn-danger btn-sm excluir-local"><i class="bi bi-trash"></i></button>';
 
@@ -67,6 +76,8 @@ export default {
                     method: 'GET',
                     // filtro
                     data: function (d) {
+                        d.data_inicio = $('#data_inicio').val();
+                        d.data_fim = $('#data_fim').val();
                         d.nome = $('#nome').val();
                         d.tensao = $('#tensao').val();
                         d.descricao = $('#descricao').val();

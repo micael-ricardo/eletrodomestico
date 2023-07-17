@@ -32,6 +32,14 @@ class DatatableEletrodomestico extends Controller
             $eletrodomesticos->where('marca_id', $request->input('marca_id'));
         }
 
+        if ($request->has('data_inicio') && $request->input('data_inicio') !== null) {
+            $eletrodomesticos->where('created_at', '>=', $request->input('data_inicio'));
+        }
+
+        if ($request->has('data_fim') && $request->input('data_fim') !== null) {
+            $eletrodomesticos->where('created_at', '<=', $request->input('data_fim'));
+        }
+
         return DataTables::of($eletrodomesticos)->toJson();
     }
 
