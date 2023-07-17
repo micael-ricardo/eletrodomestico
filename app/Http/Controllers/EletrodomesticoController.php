@@ -30,7 +30,11 @@ class EletrodomesticoController extends Controller
     {
         return $eletrodomesticos;
     }
-
+    public function edit(string $id)
+    {
+        $eletrodomesticos = eletrodomesticos::findOrFail($id);
+        return view('cadastro', compact('eletrodomesticos'));
+    }
     public function update(Request $request, eletrodomesticos $eletrodomesticos)
     {
         $request->validate([
