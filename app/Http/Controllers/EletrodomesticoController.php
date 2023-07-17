@@ -26,9 +26,10 @@ class EletrodomesticoController extends Controller
         return response()->json($eletrodomesticos, 201);
     }
 
-    public function show(eletrodomesticos $eletrodomesticos)
+    public function show($id)
     {
-        return $eletrodomesticos;
+        $eletrodomestico = eletrodomesticos::findOrFail($id);
+        return response()->json($eletrodomestico);
     }
     public function edit(string $id)
     {
@@ -56,5 +57,3 @@ class EletrodomesticoController extends Controller
         return response()->json(null, 204);
     }
 }
-
-

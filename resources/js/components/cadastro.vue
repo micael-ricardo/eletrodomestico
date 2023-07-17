@@ -38,6 +38,12 @@
 <script>
 import axios from 'axios';
 export default {
+    props: {
+        id: {
+            type: String,
+            default: null,
+        },
+    },
     data() {
         return {
             eletrodomestico: {
@@ -50,6 +56,12 @@ export default {
         }
     },
     mounted() {
+        if (this.id) {
+            axios.get('/api/eletrodomesticos/' + this.id)
+                .then(response => {
+                    this.eletrodomestico = response.data;
+                });
+        }
         axios.get('/api/marcas')
             .then(response => {
                 this.marcas = response.data;
@@ -60,20 +72,32 @@ export default {
             window.location.href = '/listar';
         },
         submitForm() {
-            axios.post('/api/eletrodomesticos', this.eletrodomestico)
-                .then(response => {
-                    alert('Eletrodoméstico cadastrado com sucesso!');
-                    this.eletrodomestico = {
-                        nome: '',
-                        descricao: '',
-                        tensao: '',
-                        marca_id: ''
-                    };
-                })
-                .catch(error => {
-                    alert('Ocorreu um erro ao cadastrar o eletrodoméstico.');
-                });
-        }
-    }
+            if (this.id) {
+                // Atualizar item existente
+                axios.put('/api/eletrodomesticos/' + this.id, this.eletrodomestico)
+                    .then(response => {
+                        alert('Eletrodoméstico atualizado com sucesso!');
+                    })
+                    .catch(error => {
+                        alert('Ocorreu um erro ao atualizar o eletrodoméstico.');
+                    });
+            } else {
+                // Criar novo item
+                axios.post('/api/eletrodomesticos', this.eletrodomestico)
+                    .then(response => {
+                        alert('Eletrodoméstico cadastrado com sucesso!');
+                        this.eletrodomestico = {
+                            nome: '',
+                            descricao: '',
+                            tensao: '',
+                            marca_id: ''
+                        };
+                    })
+                    .catch(error => {
+                        alert('Ocorreu um erro ao cadastrar o eletrodoméstico.');
+                    });
+            }
+        },
+    },
 }
 </script>

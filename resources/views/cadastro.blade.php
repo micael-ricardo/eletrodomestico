@@ -2,6 +2,7 @@
 @section('title', 'Cadastro de Eletrodomestico')
 @section('conteudo')
 
-    <cadastro-form></cadastro-form>
+
+    <cadastro-form :id="{{ $eletrodomesticos->id }}"></cadastro-form>
 
 @endsection
