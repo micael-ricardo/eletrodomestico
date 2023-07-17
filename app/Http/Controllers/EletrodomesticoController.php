@@ -14,16 +14,18 @@ class EletrodomesticoController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nome' => 'required',
-            'descricao' => 'required',
-            'tensao' => 'required',
-            'marca_id' => 'required|exists:marcas,id'
-        ]);
-
-        $eletrodomesticos = eletrodomesticos::create($request->all());
-
-        return response()->json($eletrodomesticos, 201);
+        try {
+            $request->validate([
+                'nome' => 'required',
+                'descricao' => 'required',
+                'tensao' => 'required',
+                'marca_id' => 'required|exists:marcas,id'
+            ]);
+            $eletrodomesticos = eletrodomesticos::create($request->all());
+            return response()->json($eletrodomesticos, 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Erro ao cadastrar o eletrodoméstico'], 500);
+        }
     }
 
     public function show($id)
@@ -38,14 +40,13 @@ class EletrodomesticoController extends Controller
     }
     public function update(Request $request, $id)
     {
+        try {
         $validatedData = $request->validate([
             'nome' => 'required',
             'descricao' => 'required',
             'tensao' => 'required',
             'marca_id' => 'required|exists:marcas,id',
         ]);
-
-        try {
             $eletrodomestico = eletrodomesticos::findOrFail($id);
             $eletrodomestico->nome = $validatedData['nome'];
             $eletrodomestico->descricao = $validatedData['descricao'];
@@ -61,11 +62,11 @@ class EletrodomesticoController extends Controller
 
     public function destroy(string $id)
     {
-        try{
+        try {
             $eletrodomesticos = eletrodomesticos::findOrFail($id);
             $eletrodomesticos->delete();
             return response()->json(['message' => 'Eletrodoméstico removido com sucesso'], 200);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(['message' => 'Erro ao deletar o eletrodoméstico'], 500);
         }
     }
