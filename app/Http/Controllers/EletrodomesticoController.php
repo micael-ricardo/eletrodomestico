@@ -59,11 +59,14 @@ class EletrodomesticoController extends Controller
         }
     }
 
-
-    public function destroy(eletrodomesticos $eletrodomesticos)
+    public function destroy(string $id)
     {
-        $eletrodomesticos->delete();
-
-        return response()->json(null, 204);
+        try{
+            $eletrodomesticos = eletrodomesticos::findOrFail($id);
+            $eletrodomesticos->delete();
+            return response()->json(['message' => 'Eletrodoméstico removido com sucesso'], 200);
+        } catch(\Exception $e) {
+            return response()->json(['message' => 'Erro ao deletar o eletrodoméstico'], 500);
+        }
     }
 }
