@@ -110,47 +110,44 @@ export default {
                 lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "Todos"]],
             });
 
-                        $(document).on("click", ".excluir-local", function (e) {
-                            e.preventDefault();
-                            var id = $(this).data('id');
-                            var nome = $(this).data('nome');
-                            console.log(id);
-                            $('#nome').text(nome);
-                            var formAction = $('#formExcluir').attr('action').replace(':id', id);
-                            $('#formExcluir').attr('action', formAction);
-                            $('#formExcluir input[name="id"]').val(id);
-                            $('#ModalDeletar').modal('show');
-                        });
+            $(document).on("click", ".excluir-local", function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var nome = $(this).data('nome');
+                $('#nome-eletro').text(nome);
+                $('input[name="id"]').val(id);
+                $('#formExcluir').attr('action', '/api/eletrodomesticos/' + id);
+                $('#ModalDeletar').modal('show');
+            });
 
-                        $(document).on("submit", "#formExcluir", function (e) {
-                            e.preventDefault();
-                            var form = this;
-                            function showError() {
-                                toastr.error('Ocorreu um erro ao excluir o local.');
-                            }
-                            $.ajax({
-                                url: form.action,
-                                type: form.method,
-                                data: $(form).serialize(),
-                                success: function (response, status, xhr) {
-                                    if (xhr.status === 200) {
-                                        toastr.success('Local excluído com sucesso!');
-                                        $('#ModalDeletar').modal('hide');
-                                        setTimeout(function () {
-                                            location.reload();
-                                        }, 1000);
-                                    } else {
-                                        showError();
-                                    }
-                                },
-                                error: function (xhr) {
-                                    showError();
-                                },
-                                complete: function () {
-                                    $('#ModalDeletar').modal('hide');
-                                }
-                            });
-                        });
+            $(document).on("submit", "#formExcluir", function (e) {
+                e.preventDefault();
+                var form = this;
+                function showError() {
+                    toastr.error('Ocorreu um erro ao excluir o eletrodoméstico.');
+                }
+
+                $.ajax({
+                    url: $(form).attr('action'),
+                    type: 'POST',
+                    data: $(form).serialize(),
+                    success: function (response) {
+                        toastr.success('Eletrodoméstico excluído com sucesso!');
+                        $('#ModalDeletar').modal('hide');
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                    },
+                    error: function (xhr) {
+                        showError();
+                    },
+                    complete: function () {
+                        $(form).trigger('reset');
+                    }
+                });
+            });
+
+
         },
     },
 };
