@@ -37,7 +37,11 @@
 
 <script>
 import axios from 'axios';
+import ModalExcluir from './ModalExcluir.vue';
 export default {
+    components: {
+        ModalExcluir
+    },
     computed: {
         pageTitle() {
             return this.id ? 'Editar Eletrodoméstico' : 'Cadastrar Eletrodoméstico';
