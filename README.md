@@ -5,7 +5,7 @@ A API foi desenvolvida utilizando o framework Laravel e o frontend foi construí
 
 ## Funcionalidades
 
-- Adicionar eletrodomésticos à lista<p>
+- Adicionar eletrodomésticos à lista
 - Remover eletrodomésticos da lista
 - Atualizar informações de eletrodomésticos existentes
 - Visualizar a lista de eletrodomésticos
