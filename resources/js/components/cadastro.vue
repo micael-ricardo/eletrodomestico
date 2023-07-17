@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="display-6">Cadastrar Eletrodoméstico</h2>
+        <h2 class="display-6">{{ pageTitle }}</h2>
         <form @submit.prevent="submitForm">
             <div class="row mt-4">
                 <div class="form-group col-md-4">
@@ -38,6 +38,11 @@
 <script>
 import axios from 'axios';
 export default {
+    computed: {
+        pageTitle() {
+            return this.id ? 'Editar Eletrodoméstico' : 'Cadastrar Eletrodoméstico';
+        },
+    },
     props: {
         id: {
             type: String,
@@ -73,16 +78,15 @@ export default {
         },
         submitForm() {
             if (this.id) {
-                // Atualizar item existente
                 axios.put('/api/eletrodomesticos/' + this.id, this.eletrodomestico)
                     .then(response => {
+                        console.log(response.data)
                         alert('Eletrodoméstico atualizado com sucesso!');
                     })
                     .catch(error => {
                         alert('Ocorreu um erro ao atualizar o eletrodoméstico.');
                     });
             } else {
-                // Criar novo item
                 axios.post('/api/eletrodomesticos', this.eletrodomestico)
                     .then(response => {
                         alert('Eletrodoméstico cadastrado com sucesso!');

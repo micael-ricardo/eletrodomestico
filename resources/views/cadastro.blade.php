@@ -1,8 +1,14 @@
 @extends('layouts.layout')
-@section('title', 'Cadastro de Eletrodomestico')
+@if (isset($eletrodomesticos))
+    @section('title', 'Editar Eletrodomestico')
+@else
+    @section('title', 'Cadastrar Eletrodomestico')
+@endif
 @section('conteudo')
 
-
-    <cadastro-form :id="{{ $eletrodomesticos->id }}"></cadastro-form>
-
+    @if (isset($eletrodomesticos))
+        <cadastro-form :id="{{ $eletrodomesticos->id }}"></cadastro-form>
+    @else
+        <cadastro-form></cadastro-form>
+    @endif
 @endsection
