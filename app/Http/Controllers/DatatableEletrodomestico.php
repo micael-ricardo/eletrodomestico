@@ -16,6 +16,9 @@ class DatatableEletrodomestico extends Controller
         // dd($request);
         $eletrodomesticos = eletrodomesticos::with('marca');
 
+
+        // dd($eletrodomesticos);
+
         if ($request->has('nome') && $request->input('nome') !== null) {
             $eletrodomesticos->where('nome', 'like', '%' . $request->input('nome') . '%');
         }
@@ -24,6 +27,9 @@ class DatatableEletrodomestico extends Controller
         }
         if ($request->has('descricao') && $request->input('descricao') !== null) {
             $eletrodomesticos->where('descricao', 'like', '%' . $request->input('descricao') . '%');
+        }
+        if ($request->has('marca_id') && $request->input('marca_id') !== null) {
+            $eletrodomesticos->where('marca_id', $request->input('marca_id'));
         }
 
         return DataTables::of($eletrodomesticos)->toJson();

@@ -70,6 +70,7 @@ export default {
                         d.nome = $('#nome').val();
                         d.tensao = $('#tensao').val();
                         d.descricao = $('#descricao').val();
+                        d.marca_id = $('#marca_id').val();
                     }
                 },
                 columns: columns,
